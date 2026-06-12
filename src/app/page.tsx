@@ -43,7 +43,7 @@ export default async function Home({ searchParams }: HomePageProps) {
             ) : (
               <a
                 href="/api/auth/login"
-                className="rounded-full bg-stone-950 px-5 py-3 text-sm font-medium text-stone-50 transition hover:bg-stone-800"
+                className="rounded-full bg-gray-300 px-5 py-3 text-sm font-medium text-stone-50 transition hover:bg-gray-400"
               >
                 Login with Instagram
               </a>
