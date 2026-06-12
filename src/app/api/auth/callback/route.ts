@@ -1,12 +1,16 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
-import { completeInstagramLogin, InstagramAuthError } from "@/lib/instagram-auth";
+import {
+  completeInstagramLogin,
+  getAppUrl,
+  InstagramAuthError,
+} from "@/lib/instagram-auth";
 
 const OAUTH_STATE_COOKIE = "ig_oauth_state";
 
-function redirectWithError(request: NextRequest, message: string) {
-  const url = new URL("/", request.url);
+function redirectWithError(message: string) {
+  const url = getAppUrl("/");
   url.searchParams.set("authError", message);
   return NextResponse.redirect(url);
 }
@@ -21,21 +25,21 @@ export async function GET(request: NextRequest) {
   cookieStore.delete(OAUTH_STATE_COOKIE);
 
   if (errorReason) {
-    return redirectWithError(request, errorReason);
+    return redirectWithError(errorReason);
   }
 
   if (!code) {
-    return redirectWithError(request, "Instagram did not return an authorization code.");
+    return redirectWithError("Instagram did not return an authorization code.");
   }
 
   if (!expectedState || !returnedState || expectedState !== returnedState) {
-    return redirectWithError(request, "The Instagram login state could not be verified.");
+    return redirectWithError("The Instagram login state could not be verified.");
   }
 
   try {
     await completeInstagramLogin(code);
 
-    const url = new URL("/", request.url);
+    const url = getAppUrl("/");
     url.searchParams.set("auth", "connected");
     return NextResponse.redirect(url);
   } catch (error) {
@@ -44,6 +48,6 @@ export async function GET(request: NextRequest) {
         ? error.message
         : "Instagram login failed while saving the connected account.";
 
-    return redirectWithError(request, message);
+    return redirectWithError(message);
   }
 }

@@ -94,6 +94,11 @@ export function getInstagramAuthConfig() {
   };
 }
 
+export function getAppUrl(pathname = "/"): URL {
+  const { baseUrl } = getInstagramAuthConfig();
+  return new URL(pathname, baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`);
+}
+
 export function buildInstagramLoginUrl(state: string): string {
   const { appId, redirectUri } = getInstagramAuthConfig();
   const searchParams = new URLSearchParams({
@@ -215,4 +220,3 @@ export async function completeInstagramLogin(code: string): Promise<InstagramAcc
 export async function clearInstagramAccount() {
   await setAccount(null);
 }
-

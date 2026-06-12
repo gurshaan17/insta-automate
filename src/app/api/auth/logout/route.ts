@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 
-import { clearInstagramAccount } from "@/lib/instagram-auth";
+import { clearInstagramAccount, getAppUrl } from "@/lib/instagram-auth";
 
-export async function POST(request: Request) {
+export async function POST() {
   await clearInstagramAccount();
-  return NextResponse.redirect(new URL("/", request.url), { status: 303 });
+  return NextResponse.redirect(getAppUrl("/"), { status: 303 });
 }
