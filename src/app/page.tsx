@@ -1,4 +1,6 @@
+import AutomationManager from "@/components/automation-manager";
 import { getAccount } from "@/lib/db";
+import { listAutomations } from "@/lib/automations";
 import {
   fetchRecentInstagramPosts,
   type InstagramPost,
@@ -19,6 +21,7 @@ export default async function Home({ searchParams }: HomePageProps) {
   const authError = getSingleParam(params.authError);
   const authStatus = getSingleParam(params.auth);
   const isConnected = Boolean(account);
+  const automations = await listAutomations();
   let posts: InstagramPost[] = [];
   let postsError: string | null = null;
   let needsReconnect = false;
@@ -123,23 +126,25 @@ export default async function Home({ searchParams }: HomePageProps) {
           </article>
 
           <article className="rounded-2xl border border-stone-300/70 bg-stone-50 p-5">
-            <p className="text-sm font-medium text-stone-500">Trigger Logs</p>
-            <h2 className="mt-3 text-lg font-semibold">No activity yet</h2>
+            <p className="text-sm font-medium text-stone-500">Automations</p>
+            <h2 className="mt-3 text-lg font-semibold">
+              {automations.length} configured
+            </h2>
             <p className="mt-2 text-sm leading-6 text-stone-700">
-              Comment matches and DM send attempts will be recorded here once
-              the webhook and messaging flow are in place.
+              Build keyword rules against all posts or a specific post. Duplicate
+              keyword and target pairs are blocked.
             </p>
           </article>
         </section>
 
         <section className="rounded-3xl border border-dashed border-stone-400 bg-white/70 p-6">
           <h2 className="text-lg font-semibold text-stone-900">
-            What&apos;s in Phase 2
+            What&apos;s in Phase 4
           </h2>
           <ul className="mt-4 space-y-3 text-sm leading-6 text-stone-700">
-            <li>OAuth login route that redirects to Instagram with the required business messaging scopes.</li>
-            <li>Callback exchange flow that stores the long-lived access token and connected account details in `data/db.json`.</li>
-            <li>Logout action that clears the stored account without exposing tokens to the client.</li>
+            <li>Automations API with GET, POST, and DELETE handlers backed by the local JSON store.</li>
+            <li>A form that targets all posts or one recent Instagram post and validates keyword and message requirements.</li>
+            <li>An automation table with delete actions and duplicate keyword-target protection.</li>
           </ul>
         </section>
 
@@ -239,6 +244,12 @@ export default async function Home({ searchParams }: HomePageProps) {
             </div>
           ) : null}
         </section>
+
+        <AutomationManager
+          initialAutomations={automations}
+          posts={posts}
+          isConnected={isConnected}
+        />
       </div>
     </main>
   );
