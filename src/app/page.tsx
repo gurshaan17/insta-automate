@@ -1,4 +1,5 @@
 import AutomationManager from "@/components/automation-manager";
+import TriggerDashboard from "@/components/trigger-dashboard";
 import { getAccount } from "@/lib/db";
 import { listAutomations } from "@/lib/automations";
 import {
@@ -6,6 +7,7 @@ import {
   type InstagramPost,
   InstagramPostsError,
 } from "@/lib/instagram-posts";
+import { listTriggerDashboardRows } from "@/lib/triggers";
 
 type HomePageProps = {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
@@ -22,6 +24,7 @@ export default async function Home({ searchParams }: HomePageProps) {
   const authStatus = getSingleParam(params.auth);
   const isConnected = Boolean(account);
   const automations = await listAutomations();
+  const triggers = await listTriggerDashboardRows();
   let posts: InstagramPost[] = [];
   let postsError: string | null = null;
   let needsReconnect = false;
@@ -126,25 +129,25 @@ export default async function Home({ searchParams }: HomePageProps) {
           </article>
 
           <article className="rounded-2xl border border-stone-300/70 bg-stone-50 p-5">
-            <p className="text-sm font-medium text-stone-500">Automations</p>
+            <p className="text-sm font-medium text-stone-500">Trigger Logs</p>
             <h2 className="mt-3 text-lg font-semibold">
-              {automations.length} configured
+              {triggers.length} recorded
             </h2>
             <p className="mt-2 text-sm leading-6 text-stone-700">
-              Build keyword rules against all posts or a specific post. Duplicate
-              keyword and target pairs are blocked.
+              Sent and failed DM attempts are stored here, with a manual polling
+              fallback when webhook delivery is unavailable.
             </p>
           </article>
         </section>
 
         <section className="rounded-3xl border border-dashed border-stone-400 bg-white/70 p-6">
           <h2 className="text-lg font-semibold text-stone-900">
-            What&apos;s in Phase 4
+            What&apos;s in Phase 7
           </h2>
           <ul className="mt-4 space-y-3 text-sm leading-6 text-stone-700">
-            <li>Automations API with GET, POST, and DELETE handlers backed by the local JSON store.</li>
-            <li>A form that targets all posts or one recent Instagram post and validates keyword and message requirements.</li>
-            <li>An automation table with delete actions and duplicate keyword-target protection.</li>
+            <li>A `/api/triggers` endpoint that returns recent trigger logs sorted newest first.</li>
+            <li>A dashboard table showing timestamp, post, commenter, comment text, matched keyword, automation target, status, and reason.</li>
+            <li>A manual `/api/poll-comments` fallback that checks recent comments and feeds them through the same processing engine used by webhooks.</li>
           </ul>
         </section>
 
@@ -250,6 +253,8 @@ export default async function Home({ searchParams }: HomePageProps) {
           posts={posts}
           isConnected={isConnected}
         />
+
+        <TriggerDashboard initialTriggers={triggers} isConnected={isConnected} />
       </div>
     </main>
   );
