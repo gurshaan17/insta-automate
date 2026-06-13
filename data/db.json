@@ -1,13 +1,60 @@
 {
-  "account": null,
+  "account": {
+    "userId": "28016106881330284",
+    "username": "eclipselabs_",
+    "accessToken": "IGAAcOiLI4Nx5BZAGE5a0FQNDhoWHRWbTg1WnpJenVvdC1YMlNjSkR2ZAkd1c1U0UVFIaFlGTGlNeFVmbkU0NGtLclhVV3ZAQQmh3TDZAjaGVaOWZALclBudHJ0RUcxYldEYVB1N01qanZApUWRBOFFSdEFMZAUp3",
+    "expiresAt": "2026-08-11T18:08:30.221Z"
+  },
   "automations": [
     {
-      "id": "84b20d35-9531-48c5-b37c-17087bd66e96",
+      "id": "2a18c824-7c46-4373-8be9-148ac2919516",
+      "postId": "ALL",
+      "keyword": "example",
+      "message": "test",
+      "createdAt": "2026-06-13T10:28:22.501Z"
+    },
+    {
+      "id": "2facd9d8-bfe0-44c7-9e47-64ca38aae335",
+      "postId": "18034452464811789",
+      "keyword": "location",
+      "message": "here is your link:",
+      "createdAt": "2026-06-13T10:25:49.020Z"
+    },
+    {
+      "id": "8a4f275b-1442-448b-928d-02d187ac089a",
+      "postId": "18121890577707551",
+      "keyword": "need",
+      "message": "thanks for commenting!!!!!!!",
+      "createdAt": "2026-06-13T10:19:51.207Z"
+    },
+    {
+      "id": "07b86c8a-2146-4187-8254-0350b351623d",
       "postId": "18121890577707551",
       "keyword": "link",
-      "message": "here is your link!!!!!!!",
-      "createdAt": "2026-06-13T08:23:28.887Z"
+      "message": "here is your lnik!!!!!!",
+      "createdAt": "2026-06-13T09:40:54.867Z"
     }
   ],
-  "triggers": []
+  "triggers": [
+    {
+      "id": "84bd5074-230b-4100-aaba-c7d59bf5f493",
+      "automationId": "2a18c824-7c46-4373-8be9-148ac2919516",
+      "postId": "123123123",
+      "commenterId": "232323232",
+      "commentText": "This is an example.",
+      "status": "failed",
+      "reason": "Unsupported post request. Object with ID '28016106881330284' does not exist, cannot be loaded due to missing permissions, or does not support this operation",
+      "timestamp": "2026-06-13T10:28:33.677Z"
+    },
+    {
+      "id": "8959b1d7-65e5-4835-a78b-c487105cb5bf",
+      "automationId": "2a18c824-7c46-4373-8be9-148ac2919516",
+      "postId": "123123123",
+      "commenterId": "232323232",
+      "commentText": "This is an example.",
+      "status": "failed",
+      "reason": "Unsupported post request. Object with ID '28016106881330284' does not exist, cannot be loaded due to missing permissions, or does not support this operation",
+      "timestamp": "2026-06-13T10:28:30.795Z"
+    }
+  ]
 }

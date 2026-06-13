@@ -200,7 +200,7 @@ export default async function Home({ searchParams }: HomePageProps) {
                     key={post.id}
                     className="overflow-hidden rounded-2xl border border-stone-300/80 bg-stone-50"
                   >
-                    <div className="aspect-[4/3] bg-stone-200">
+                    <div className="aspect-4/3 bg-stone-200">
                       {previewUrl ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img

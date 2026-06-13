@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 
 import type { Automation } from "@/lib/db";
 import type { InstagramPost } from "@/lib/instagram-posts";
@@ -39,7 +39,12 @@ export default function AutomationManager({
   const [message, setMessage] = useState("");
   const [feedback, setFeedback] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [hasMounted, setHasMounted] = useState(false);
   const [isPending, startTransition] = useTransition();
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   function resetFeedback() {
     setFeedback(null);
@@ -99,6 +104,28 @@ export default function AutomationManager({
       setAutomations((current) => current.filter((automation) => automation.id !== id));
       setFeedback("Automation deleted.");
     });
+  }
+
+  function formatCreatedAt(createdAt: string) {
+    const date = new Date(createdAt);
+    if (Number.isNaN(date.getTime())) {
+      return createdAt;
+    }
+
+    if (!hasMounted) {
+      return date.toLocaleString("en-GB", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
+        timeZone: "UTC",
+      });
+    }
+
+    return date.toLocaleString();
   }
 
   return (
@@ -226,7 +253,7 @@ export default function AutomationManager({
                   <td className="px-4 py-4 align-top">{automation.keyword}</td>
                   <td className="px-4 py-4 align-top">{automation.message}</td>
                   <td className="px-4 py-4 align-top">
-                    {new Date(automation.createdAt).toLocaleString()}
+                    {formatCreatedAt(automation.createdAt)}
                   </td>
                   <td className="px-4 py-4 align-top">
                     <button

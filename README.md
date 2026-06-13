@@ -275,12 +275,6 @@ Why this exists:
 - Store webhook deliveries and processing state separately for observability
 - Avoid doing all comment processing directly inside the webhook request path under production load
 
-## AI Tool Usage Notes
-
-- AI was used to help scaffold the Next.js app structure, route handlers, storage helpers, and incremental phase-by-phase implementation
-- The code still required manual debugging around OAuth redirects, client form submission behavior, and webhook handling
-- Meta platform setup details were especially important to verify carefully because small mismatches in app type, callback URLs, or public host configuration break the flow
-
 ## Scripts
 
 ```bash

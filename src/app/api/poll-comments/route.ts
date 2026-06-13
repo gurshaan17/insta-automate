@@ -20,9 +20,11 @@ export async function POST() {
 
     for (const post of posts) {
       const comments = await fetchRecentCommentsForPost(post.id);
+      console.log(`[poll-comments] Post ${post.id}: found ${comments.length} comments`);
 
       for (const comment of comments) {
         const results = await processComment(comment);
+        console.log(`[poll-comments] Processed comment ${comment.commentId}:`, results);
         processed.push({
           postId: post.id,
           commentId: comment.commentId,
