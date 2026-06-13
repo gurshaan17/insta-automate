@@ -1,10 +1,13 @@
 {
-  "account": {
-    "userId": "28016106881330284",
-    "username": "eclipselabs_",
-    "accessToken": "IGAAcOiLI4Nx5BZAGFNUDJDUmVFWHZA1MjVXT0ZARdXVub3ZAnZAXNIUGRJZA1k5a2d1bFQ3THVOdzIwNFNjNENiUlppUi1OWmlHbm5hWTNCaGh0RUgyclNHbDBBVVFSdWhsamQxbEdXRnUyQ3dfSTRrSVZA2ODZAn",
-    "expiresAt": "2026-08-11T18:08:30.302Z"
-  },
-  "automations": [],
+  "account": null,
+  "automations": [
+    {
+      "id": "84b20d35-9531-48c5-b37c-17087bd66e96",
+      "postId": "18121890577707551",
+      "keyword": "link",
+      "message": "here is your link!!!!!!!",
+      "createdAt": "2026-06-13T08:23:28.887Z"
+    }
+  ],
   "triggers": []
 }

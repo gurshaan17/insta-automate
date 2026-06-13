@@ -1,7 +1,16 @@
 import "server-only";
 
+import { randomUUID } from "node:crypto";
+
 import { listAutomations } from "@/lib/automations";
-import { getTriggers, type Automation } from "@/lib/db";
+import {
+  getTriggers,
+  setTriggers,
+  type Automation,
+  type TriggerLog,
+} from "@/lib/db";
+import { InstagramDmError, sendPrivateReplyDm } from "@/lib/instagram-dm";
+import { InstagramAuthError } from "@/lib/instagram-auth";
 import type { InstagramCommentEvent } from "@/lib/instagram-webhooks";
 
 export type ProcessCommentResult =
@@ -22,23 +31,13 @@ export type ProcessCommentResult =
       commentId: string;
     }
   | {
-      status: "deferred";
+      status: "sent" | "failed";
       reason: string;
       automationId: string;
       postId: string;
       commenterId: string;
       commentId: string;
     };
-
-type SendDmInput = {
-  automation: Automation;
-  comment: InstagramCommentEvent;
-};
-
-type SendDmResult = {
-  status: "deferred";
-  reason: string;
-};
 
 function keywordMatches(commentText: string, keyword: string) {
   return commentText.toLowerCase().includes(keyword.toLowerCase());
@@ -80,13 +79,29 @@ function getMatchingAutomations(
   );
 }
 
-async function sendPrivateReplyDm(input: SendDmInput): Promise<SendDmResult> {
-  void input;
-
+function buildTriggerLog(input: {
+  automationId: string;
+  postId: string;
+  commenterId: string;
+  commentText: string;
+  status: "sent" | "failed";
+  reason: string | null;
+}): TriggerLog {
   return {
-    status: "deferred",
-    reason: "DM sending is intentionally deferred until Phase 6 is implemented.",
+    id: randomUUID(),
+    automationId: input.automationId,
+    postId: input.postId,
+    commenterId: input.commenterId,
+    commentText: input.commentText,
+    status: input.status,
+    reason: input.reason,
+    timestamp: new Date().toISOString(),
   };
+}
+
+async function appendTriggerLog(trigger: TriggerLog) {
+  const existingTriggers = await getTriggers();
+  await setTriggers([trigger, ...existingTriggers]);
 }
 
 export async function processComment(
@@ -133,19 +148,57 @@ export async function processComment(
       continue;
     }
 
-    const sendResult = await sendPrivateReplyDm({
-      automation,
-      comment,
-    });
+    try {
+      await sendPrivateReplyDm({
+        commentId: comment.commentId,
+        message: automation.message,
+      });
 
-    results.push({
-      status: sendResult.status,
-      reason: sendResult.reason,
-      automationId: automation.id,
-      postId: comment.postId,
-      commenterId: comment.commenterId,
-      commentId: comment.commentId,
-    });
+      await appendTriggerLog(
+        buildTriggerLog({
+          automationId: automation.id,
+          postId: comment.postId,
+          commenterId: comment.commenterId,
+          commentText: comment.commentText,
+          status: "sent",
+          reason: null,
+        }),
+      );
+
+      results.push({
+        status: "sent",
+        reason: "Private reply DM sent.",
+        automationId: automation.id,
+        postId: comment.postId,
+        commenterId: comment.commenterId,
+        commentId: comment.commentId,
+      });
+    } catch (error) {
+      const reason =
+        error instanceof InstagramDmError || error instanceof InstagramAuthError
+          ? error.message
+          : "Failed to send the Instagram private reply DM.";
+
+      await appendTriggerLog(
+        buildTriggerLog({
+          automationId: automation.id,
+          postId: comment.postId,
+          commenterId: comment.commenterId,
+          commentText: comment.commentText,
+          status: "failed",
+          reason,
+        }),
+      );
+
+      results.push({
+        status: "failed",
+        reason,
+        automationId: automation.id,
+        postId: comment.postId,
+        commenterId: comment.commenterId,
+        commentId: comment.commentId,
+      });
+    }
   }
 
   return results;
