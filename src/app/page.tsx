@@ -140,17 +140,6 @@ export default async function Home({ searchParams }: HomePageProps) {
           </article>
         </section>
 
-        <section className="rounded-3xl border border-dashed border-stone-400 bg-white/70 p-6">
-          <h2 className="text-lg font-semibold text-stone-900">
-            What&apos;s in Phase 7
-          </h2>
-          <ul className="mt-4 space-y-3 text-sm leading-6 text-stone-700">
-            <li>A `/api/triggers` endpoint that returns recent trigger logs sorted newest first.</li>
-            <li>A dashboard table showing timestamp, post, commenter, comment text, matched keyword, automation target, status, and reason.</li>
-            <li>A manual `/api/poll-comments` fallback that checks recent comments and feeds them through the same processing engine used by webhooks.</li>
-          </ul>
-        </section>
-
         <section className="rounded-3xl border border-stone-300/70 bg-white/85 p-6 shadow-[0_14px_40px_rgba(120,90,20,0.06)]">
           <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
             <div>

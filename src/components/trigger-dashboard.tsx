@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useTransition, useEffect } from "react";
 
 import type { TriggerDashboardRow } from "@/lib/instagram-comments";
 
@@ -29,6 +29,21 @@ export default function TriggerDashboard({
   const [feedback, setFeedback] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
+
+  const [formattedTimestamps, setFormattedTimestamps] = useState<Record<string, string>>(() =>
+    Object.fromEntries(
+      initialTriggers.map((t) => [String(t.id), new Date(t.timestamp).toISOString()]),
+    ),
+  );
+
+  useEffect(() => {
+    const map: Record<string, string> = {};
+    for (const t of initialTriggers) {
+      map[String(t.id)] = new Date(t.timestamp).toLocaleString();
+    }
+    setFormattedTimestamps(map);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function handlePollNow() {
     setFeedback(null);
@@ -123,7 +138,7 @@ export default function TriggerDashboard({
               triggers.map((trigger) => (
                 <tr key={trigger.id}>
                   <td className="px-4 py-4 align-top">
-                    {new Date(trigger.timestamp).toLocaleString()}
+                    {formattedTimestamps[String(trigger.id)]}
                   </td>
                   <td className="px-4 py-4 align-top">{trigger.postId}</td>
                   <td className="px-4 py-4 align-top">{trigger.commenterId}</td>
