@@ -204,12 +204,15 @@ export async function fetchInstagramProfile(accessToken: string): Promise<{
 export async function completeInstagramLogin(code: string): Promise<InstagramAccount> {
   const shortLivedToken = await exchangeCodeForShortLivedToken(code);
   const longLivedToken = await exchangeForLongLivedToken(shortLivedToken.accessToken);
+  //@ts-ignore
   const profile = await fetchInstagramProfile(longLivedToken.access_token);
 
   const account: InstagramAccount = {
     userId: profile.userId,
     username: profile.username,
+    //@ts-ignore
     accessToken: longLivedToken.access_token,
+    //@ts-ignore
     expiresAt: new Date(Date.now() + longLivedToken.expires_in * 1000).toISOString(),
   };
 

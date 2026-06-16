@@ -46,9 +46,6 @@ export default async function Home({ searchParams }: HomePageProps) {
     <main className="min-h-screen bg-[linear-gradient(180deg,#f7f4ec_0%,#efe8d8_100%)] px-6 py-10 text-stone-950">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8">
         <section className="rounded-3xl border border-stone-300/70 bg-white/90 p-8 shadow-[0_18px_60px_rgba(120,90,20,0.08)] backdrop-blur">
-          <p className="text-sm font-medium uppercase tracking-[0.24em] text-stone-500">
-            Phase 2 OAuth
-          </p>
           <h1 className="mt-4 max-w-3xl text-4xl font-semibold tracking-tight text-stone-950">
             Instagram Auto-DM Comment Responder
           </h1>
@@ -122,9 +119,7 @@ export default async function Home({ searchParams }: HomePageProps) {
               {isConnected ? `${posts.length} loaded` : "Connect to load posts"}
             </h2>
             <p className="mt-2 text-sm leading-6 text-stone-700">
-              {isConnected
-                ? "Phase 3 pulls recent media from the Instagram API so later automations can target a specific post."
-                : "Recent posts will appear here after Instagram Login succeeds."}
+              Number of recent posts will appear here.
             </p>
           </article>
 
