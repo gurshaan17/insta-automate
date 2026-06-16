@@ -102,9 +102,9 @@ export async function fetchRecentCommentsForPost(postId: string) {
 
       const commenterId =
         comment.from?.id ??
-        comment.username ??
         comment.from?.username ??
-        null;
+        comment.username ??
+        comment.id; // fallback: use comment id — sufficient for dedup per post
 
       if (!commenterId) {
         return null;

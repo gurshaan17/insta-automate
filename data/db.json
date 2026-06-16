@@ -1,60 +1,46 @@
 {
   "account": {
-    "userId": "28016106881330284",
+    "userId": "28016106881330285",
     "username": "eclipselabs_",
-    "accessToken": "IGAAcOiLI4Nx5BZAGE5a0FQNDhoWHRWbTg1WnpJenVvdC1YMlNjSkR2ZAkd1c1U0UVFIaFlGTGlNeFVmbkU0NGtLclhVV3ZAQQmh3TDZAjaGVaOWZALclBudHJ0RUcxYldEYVB1N01qanZApUWRBOFFSdEFMZAUp3",
-    "expiresAt": "2026-08-11T18:08:30.221Z"
+    "accessToken": "IGAAcOiLI4Nx5BZAGFuZAGdjU0JvTXVFOVMtd3NZANUl2R3ROeUxjeDNUcVp4MHR3UE9fZAkp3dGJWYXFsREE4SzZADalNOb29NSy1idkt6ZAWpYUlc5ZAjRBNU41QlBWWWVBeWNvdUF0SXRYZAWFRUnhGYVFFVm9B",
+    "expiresAt": "2026-08-15T04:07:28.352Z"
   },
   "automations": [
     {
-      "id": "2a18c824-7c46-4373-8be9-148ac2919516",
-      "postId": "ALL",
-      "keyword": "example",
-      "message": "test",
-      "createdAt": "2026-06-13T10:28:22.501Z"
-    },
-    {
-      "id": "2facd9d8-bfe0-44c7-9e47-64ca38aae335",
-      "postId": "18034452464811789",
-      "keyword": "location",
-      "message": "here is your link:",
-      "createdAt": "2026-06-13T10:25:49.020Z"
-    },
-    {
-      "id": "8a4f275b-1442-448b-928d-02d187ac089a",
+      "id": "9f4d4c78-6fa5-443e-bcdc-eff7e3aae423",
       "postId": "18121890577707551",
       "keyword": "need",
-      "message": "thanks for commenting!!!!!!!",
-      "createdAt": "2026-06-13T10:19:51.207Z"
+      "message": "Here is your link: checkout",
+      "createdAt": "2026-06-16T07:53:42.069Z"
     },
     {
-      "id": "07b86c8a-2146-4187-8254-0350b351623d",
+      "id": "5dcc40c8-dd58-4ba3-9797-ab15dac55cd9",
       "postId": "18121890577707551",
       "keyword": "link",
-      "message": "here is your lnik!!!!!!",
-      "createdAt": "2026-06-13T09:40:54.867Z"
+      "message": "here is your link:",
+      "createdAt": "2026-06-16T04:08:42.185Z"
     }
   ],
   "triggers": [
     {
-      "id": "84bd5074-230b-4100-aaba-c7d59bf5f493",
-      "automationId": "2a18c824-7c46-4373-8be9-148ac2919516",
-      "postId": "123123123",
-      "commenterId": "232323232",
-      "commentText": "This is an example.",
+      "id": "eaace550-0642-4967-bf2e-da27878990a3",
+      "automationId": "5dcc40c8-dd58-4ba3-9797-ab15dac55cd9",
+      "postId": "18121890577707551",
+      "commenterId": "1031244802922936",
+      "commentText": "link",
       "status": "failed",
       "reason": "Unsupported post request. Object with ID '28016106881330284' does not exist, cannot be loaded due to missing permissions, or does not support this operation",
-      "timestamp": "2026-06-13T10:28:33.677Z"
+      "timestamp": "2026-06-16T08:05:08.782Z"
     },
     {
-      "id": "8959b1d7-65e5-4835-a78b-c487105cb5bf",
-      "automationId": "2a18c824-7c46-4373-8be9-148ac2919516",
-      "postId": "123123123",
-      "commenterId": "232323232",
-      "commentText": "This is an example.",
+      "id": "e615fef3-6d7d-4d01-8cf0-c28c5d72cfac",
+      "automationId": "5dcc40c8-dd58-4ba3-9797-ab15dac55cd9",
+      "postId": "18121890577707551",
+      "commenterId": "1031244802922936",
+      "commentText": "link",
       "status": "failed",
       "reason": "Unsupported post request. Object with ID '28016106881330284' does not exist, cannot be loaded due to missing permissions, or does not support this operation",
-      "timestamp": "2026-06-13T10:28:30.795Z"
+      "timestamp": "2026-06-16T08:04:43.288Z"
     }
   ]
 }
