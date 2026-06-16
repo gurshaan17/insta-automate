@@ -78,7 +78,6 @@ export async function fetchRecentCommentsForPost(postId: string) {
   });
 
   const payload = (await response.json()) as InstagramCommentsResponse;
-  console.log(`[instagram-comments] API response for post ${postId}:`, JSON.stringify(payload));
 
   if (!response.ok) {
     if (isTokenError(payload)) {

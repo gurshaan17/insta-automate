@@ -2,45 +2,45 @@
   "account": {
     "userId": "28016106881330285",
     "username": "eclipselabs_",
-    "accessToken": "IGAAcOiLI4Nx5BZAGFuZAGdjU0JvTXVFOVMtd3NZANUl2R3ROeUxjeDNUcVp4MHR3UE9fZAkp3dGJWYXFsREE4SzZADalNOb29NSy1idkt6ZAWpYUlc5ZAjRBNU41QlBWWWVBeWNvdUF0SXRYZAWFRUnhGYVFFVm9B",
-    "expiresAt": "2026-08-15T04:07:28.352Z"
+    "accessToken": "IGAAcOiLI4Nx5BZAFplRXFzZAFNVZAWtFdFItd1VJalpkc3hLMEp4TTVXam5ZAcE54dzlQUHI1RFpGN3hKWWlpMzRGMjVGWDJISTh4dG1COGo4b1BnX1ByRDNXeENBNHBhanZALampDV0VKTnQxem92MTNsSXh3",
+    "expiresAt": "2026-08-15T04:07:28.537Z"
   },
   "automations": [
     {
-      "id": "9f4d4c78-6fa5-443e-bcdc-eff7e3aae423",
-      "postId": "18121890577707551",
-      "keyword": "need",
-      "message": "Here is your link: checkout",
-      "createdAt": "2026-06-16T07:53:42.069Z"
+      "id": "b4ddd3ad-e0dd-46dd-bdc5-dedae996a19a",
+      "postId": "18034452464811789",
+      "keyword": "location",
+      "message": "the location is srinagar",
+      "createdAt": "2026-06-16T08:19:32.913Z"
     },
     {
-      "id": "5dcc40c8-dd58-4ba3-9797-ab15dac55cd9",
+      "id": "24a1b5fc-7ecc-4d94-9edd-efde394bd5ea",
       "postId": "18121890577707551",
       "keyword": "link",
-      "message": "here is your link:",
-      "createdAt": "2026-06-16T04:08:42.185Z"
+      "message": "here is your link!!!!",
+      "createdAt": "2026-06-16T08:13:15.651Z"
     }
   ],
   "triggers": [
     {
-      "id": "eaace550-0642-4967-bf2e-da27878990a3",
-      "automationId": "5dcc40c8-dd58-4ba3-9797-ab15dac55cd9",
-      "postId": "18121890577707551",
+      "id": "ece6e448-8814-441a-86cc-6955f1bb67ec",
+      "automationId": "b4ddd3ad-e0dd-46dd-bdc5-dedae996a19a",
+      "postId": "18034452464811789",
       "commenterId": "1031244802922936",
-      "commentText": "link",
-      "status": "failed",
-      "reason": "Unsupported post request. Object with ID '28016106881330284' does not exist, cannot be loaded due to missing permissions, or does not support this operation",
-      "timestamp": "2026-06-16T08:05:08.782Z"
+      "commentText": "Which location is this?",
+      "status": "sent",
+      "reason": null,
+      "timestamp": "2026-06-16T08:20:54.286Z"
     },
     {
-      "id": "e615fef3-6d7d-4d01-8cf0-c28c5d72cfac",
-      "automationId": "5dcc40c8-dd58-4ba3-9797-ab15dac55cd9",
+      "id": "1bc6771f-dfa4-4b86-a385-fb3680e4a700",
+      "automationId": "24a1b5fc-7ecc-4d94-9edd-efde394bd5ea",
       "postId": "18121890577707551",
       "commenterId": "1031244802922936",
       "commentText": "link",
-      "status": "failed",
-      "reason": "Unsupported post request. Object with ID '28016106881330284' does not exist, cannot be loaded due to missing permissions, or does not support this operation",
-      "timestamp": "2026-06-16T08:04:43.288Z"
+      "status": "sent",
+      "reason": null,
+      "timestamp": "2026-06-16T08:13:49.528Z"
     }
   ]
 }

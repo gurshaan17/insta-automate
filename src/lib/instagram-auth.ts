@@ -174,7 +174,7 @@ export async function fetchInstagramProfile(accessToken: string): Promise<{
   username: string | null;
 }> {
   const url = new URL(`${INSTAGRAM_GRAPH_BASE_URL}/me`);
-  url.searchParams.set("fields", "user_id,username");
+  url.searchParams.set("fields", "id,username");
   url.searchParams.set("access_token", accessToken);
 
   const response = await fetch(url, {
@@ -207,7 +207,7 @@ export async function completeInstagramLogin(code: string): Promise<InstagramAcc
   const profile = await fetchInstagramProfile(longLivedToken.access_token);
 
   const account: InstagramAccount = {
-    userId: shortLivedToken.userId ?? profile.userId,
+    userId: profile.userId,
     username: profile.username,
     accessToken: longLivedToken.access_token,
     expiresAt: new Date(Date.now() + longLivedToken.expires_in * 1000).toISOString(),
